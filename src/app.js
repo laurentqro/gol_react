@@ -1,15 +1,44 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { GOL } from './gol';
 
-class Main extends React.Component {
-  render() {
+function Row(props) {
+  return props.cells.map( (cell) => {
     return (
-      <div>
-        <h1>Hello World</h1>
+      <div className="row">
+        {cell.state}
       </div>
     )
+  });
+}
+
+class World extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      rows: GOL.createWorld(3, 3).cells
+    }
+  }
+
+  render() {
+    return this.state.rows.map((cells) => {
+      return (
+        <div>
+          <div className="row">
+            {this.renderRow(cells)}
+          </div>
+        </div>
+      )
+    });
+  }
+
+  renderRow(cells) {
+    return (
+      <Row cells={cells} />
+    );
   }
 }
 
 const app = document.getElementById('app')
-ReactDOM.render(<Main />, app)
+ReactDOM.render(<World />, app)
