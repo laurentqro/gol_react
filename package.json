@@ -1,0 +1,19 @@
+{
+  "name": "gol-react",
+  "version": "1.0.0",
+  "description": "Game of Life with ReactJS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurentqro/gol_react.git"
+  },
+  "author": "Laurent Curau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laurentqro/gol_react/issues"
+  },
+  "homepage": "https://github.com/laurentqro/gol_react#readme"
+}
