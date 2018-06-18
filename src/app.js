@@ -5,8 +5,10 @@ import './index.css';
 
 function Row(props) {
   return props.cells.map( (cell) => {
+    let classNames = `cell ${cell.state}`;
+
     return (
-      <div className="cell">
+      <div className={classNames}>
       </div>
     )
   });
