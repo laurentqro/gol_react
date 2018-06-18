@@ -4,7 +4,7 @@
   "description": "Game of Life with ReactJS",
   "main": "app.js",
   "scripts": {
-    "test": "mocha tests/**/*.test.js",
+    "test": "mocha --require babel-register tests/**/*.test.js",
     "build": "webpack",
     "watch": "webpack-dev-server --content-base dist"
   },
@@ -23,6 +23,10 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.17.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "webpack": "^4.12.0",
