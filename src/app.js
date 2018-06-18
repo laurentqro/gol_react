@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { GOL } from './gol';
+import './index.css';
 
 function Row(props) {
   return props.cells.map( (cell) => {
     return (
-      <div className="row">
-        {cell.state}
+      <div className="cell">
       </div>
     )
   });
@@ -17,20 +17,22 @@ class World extends React.Component {
     super(props);
 
     this.state = {
-      rows: GOL.createWorld(3, 3).cells
+      rows: GOL.createWorld(70, 70).cells
     }
   }
 
   render() {
-    return this.state.rows.map((cells) => {
-      return (
-        <div>
-          <div className="row">
-            {this.renderRow(cells)}
-          </div>
-        </div>
-      )
-    });
+    return (
+      <div className="world">
+      {this.state.rows.map((cells) => {
+          return (
+              <div className="row">
+                {this.renderRow(cells)}
+              </div>
+          )
+        })}
+      </div>
+    )
   }
 
   renderRow(cells) {
