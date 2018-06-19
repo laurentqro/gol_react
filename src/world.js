@@ -1,33 +1,38 @@
 import Cell from './cell';
 
 export default class World {
-  constructor(width, height) {
-    this.cells = [];
+  constructor(cells) {
+    this.cells = cells || [];
+  }
 
-    let rows = Array.from(Array(width).keys());
-    let columns = Array.from(Array(height).keys());
+  seedWithSize(size) {
+    let rows = Array.from(Array(size).keys());
+    let columns = Array.from(Array(size).keys());
 
     rows.forEach((row, xCoordinate) => {
-      this.cells.push([]);
       columns.forEach((column, yCoordinate) => {
-        let cell = new Cell(xCoordinate, yCoordinate);
-        this.cells[xCoordinate].push(cell);
+        this.cells.push(new Cell({ x: xCoordinate, y: yCoordinate }));
       });
     });
   }
 
+  tick() {
+    let cells = this.cells.map((cell) => cell.isAliveInNextGeneration(this));
+    console.log('after tick: ', cells);
+    return new World(cells);
+  }
+
   isEmpty() {
+    console.log(this.cells);
+    return this.cells.every((cell) => !cell.isAlive());
+  }
+
+  createCellAtLocation(coordinates) {
+    this.getCellAtCoordinates(coordinates).setAlive();
+  }
+
+  getCellAtCoordinates(coordinates) {
     return this.cells
-      .reduce((accumulator, currentCell) => accumulator.concat(currentCell), [])
-      .every((cell) => !cell.isAlive());
-  }
-
-  createCellAtLocation(...coordinates) {
-    this.getCellAtCoordinates(...coordinates).setAlive();
-  }
-
-  getCellAtCoordinates(...coordinates) {
-    console.log("coords", coordinates);
-    return this.cells[coordinates[0]][coordinates[1]];
+      .find((cell) => cell.coordinates.x === coordinates.x && cell.coordinates.y === coordinates.y);
   }
 }
