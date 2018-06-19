@@ -27,4 +27,19 @@ describe('Cell', () => {
 
     expect(newWorld.getCellAtCoordinates({ x: 1, y: 1 }).isDead()).to.equal(true);
   });
+
+  it('with four or more neighbors dies, as if by overpopulation', () => {
+    let world = new World();
+    world.seedWithSize(3);
+    world.createCellAtLocation({ x: 1, y: 1 });
+
+    world.createCellAtLocation({ x: 0, y: 0 });
+    world.createCellAtLocation({ x: 0, y: 1 });
+    world.createCellAtLocation({ x: 0, y: 2 });
+    world.createCellAtLocation({ x: 1, y: 0 });
+
+    let newWorld = world.tick();
+
+    expect(newWorld.getCellAtCoordinates({ x: 1, y: 1 }).isDead()).to.equal(true);
+  });
 });

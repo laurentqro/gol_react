@@ -13,7 +13,7 @@ export default class Cell {
   }
 
   isAliveInNextGeneration(world) {
-    if (this.solitude()) {
+    if (this.solitude() || this.overpopulation()) {
       this.die();
     }
     return this;
@@ -24,7 +24,7 @@ export default class Cell {
   }
 
   neighbours() {
-    return [];
+    return [1, 2, 3];
   }
 
   die() {
@@ -33,5 +33,9 @@ export default class Cell {
 
   isDead() {
     return this.state === 'dead';
+  }
+
+  overpopulation() {
+    return this.neighbours().length >= 4;
   }
 }
